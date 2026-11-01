@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HealthPulse Pro - Premium Doctor Booking & Telehealth Platform</title>
+  
+  <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* -------------------------------------------------------------
+     * HealthPulse Pro - Global Design System & Stylesheet
+     * ------------------------------------------------------------- */
+    :root {
+      --font-primary: 'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif;
+      --bg-main: #0b0f19;
+      --bg-card: rgba(18, 26, 43, 0.85);
+      --bg-glass: rgba(15, 23, 42, 0.75);
+      --border-light: rgba(255, 255, 255, 0.08);
+      --border-active: rgba(13, 148, 136, 0.5);
+      --primary-teal: #0d9488;
+      --primary-cyan: #06b6d4;
+      --primary-emerald: #10b981;
+      --accent-indigo: #6366f1;
+      --accent-rose: #f43f5e;
+      --accent-amber: #f59e0b;
+      --text-main: #f8fafc;
+      --text-sub: #94a3b8;
+      --text-muted: #64748b;
+      --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+      --shadow-glow: 0 0 25px rgba(6, 182, 212, 0.25);
+      --shadow-glow-teal: 0 0 30px rgba(13, 148, 136, 0.35);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-xl: 28px;
+    }
+
+    [data-theme='light'] {
+      --bg-main: #f8fafc;
+      --bg-card: rgba(255, 255, 255, 0.95);
+      --bg-glass: rgba(255, 255, 255, 0.85);
+      --border-light: rgba(226, 232, 240, 0.8);
+      --text-main: #0f172a;
+      --text-sub: #475569;
+      --text-muted: #94a3b8;
+      --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: var(--font-primary);
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      line-height: 1.6;
+      min-height: 100vh;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .container { width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
+    .glass-panel {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #38bdf8 0%, #0d9488 50%, #34d399 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+      padding: 0.7rem 1.4rem; font-family: var(--font-primary); font-size: 0.9rem; font-weight: 600;
+      border-radius: var(--radius-md); border: none; cursor: pointer; transition: all 0.2s ease;
+      text-decoration: none; white-space: nowrap;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary-teal), var(--primary-cyan));
+      color: #ffffff; box-shadow: 0 4px 15px rgba(13, 148, 136, 0.3);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(6, 182, 212, 0.45); }
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.06); color: var(--text-main); border: 1px solid var(--border-light);
+    }
+    .btn-secondary:hover { background: rgba(255, 255, 255, 0.12); transform: translateY(-2px); }
+    .btn-outline { background: transparent; color: var(--primary-cyan); border: 1px solid var(--primary-cyan); }
+    .btn-outline:hover { background: rgba(6, 182, 212, 0.1); }
+    .btn-danger { background: rgba(244, 63, 94, 0.15); color: var(--accent-rose); border: 1px solid rgba(244, 63, 94, 0.3); }
+    .btn-sm { padding: 0.45rem 0.9rem; font-size: 0.825rem; border-radius: var(--radius-sm); }
+    .btn-lg { padding: 0.9rem 1.8rem; font-size: 1rem; border-radius: var(--radius-md); }
+
+    .badge {
+      display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.25rem 0.75rem;
+      font-size: 0.75rem; font-weight: 600; border-radius: 999px; text-transform: uppercase;
+    }
+    .badge-teal { background: rgba(13, 148, 136, 0.15); color: #2dd4bf; border: 1px solid rgba(13, 148, 136, 0.3); }
+    .badge-emerald { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+    .badge-amber { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+    .badge-rose { background: rgba(244, 63, 94, 0.15); color: #fda4af; border: 1px solid rgba(244, 63, 94, 0.3); }
+    .badge-indigo { background: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3); }
+
+    .pulse-dot {
+      width: 8px; height: 8px; border-radius: 50%; background-color: var(--primary-emerald);
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); animation: pulse-ring 1.8s infinite;
+    }
+    @keyframes pulse-ring {
+      0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+      70% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    }
+
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(5, 8, 15, 0.85); backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: center; padding: 1.5rem; z-index: 1000;
+    }
+    .modal-content {
+      background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-xl);
+      max-width: 720px; width: 100%; max-height: 90vh; overflow-y: auto; box-shadow: var(--shadow-md); position: relative;
+    }
+
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.2rem; }
+    .form-label { font-size: 0.85rem; font-weight: 600; color: var(--text-main); }
+    .form-input, .form-select, .form-textarea {
+      width: 100%; padding: 0.7rem 0.9rem; background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--border-light); border-radius: var(--radius-md);
+      color: var(--text-main); font-family: var(--font-primary); font-size: 0.9rem; outline: none;
+    }
+
+    .doctors-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1.5rem;
+    }
+    @media (max-width: 640px) { .doctors-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <!-- Top Header Navigation -->
+  <header style="position: sticky; top: 0; z-index: 100; background: var(--bg-glass); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-light); padding: 0.85rem 0;">
+    <div class="container" style="display: flex; align-items: center; justify-content: space-between;">
+      
+      <div onclick="switchTab('explore')" style="display: flex; align-items: center; gap: 0.75rem; cursor: pointer;">
+        <div style="width: 42px; height: 42px; border-radius: 12px; background: linear-gradient(135deg, #0d9488, #06b6d4); display: flex; align-items: center; justify-content: center; color: #fff; box-shadow: var(--shadow-glow-teal);">
+          <i data-lucide="activity"></i>
+        </div>
+        <div>
+          <div style="font-weight: 800; font-size: 1.25rem; display: flex; align-items: center; gap: 0.3rem;">
+            HealthPulse <span style="font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 4px; background: rgba(6,182,212,0.2); color: #38bdf8;">PRO</span>
+          </div>
+          <div style="font-size: 0.72rem; color: var(--text-sub); margin-top: -2px;">Next-Gen Doctor Appointments</div>
+        </div>
+      </div>
+
+      <nav style="display: flex; align-items: center; gap: 0.5rem;">
+        <button id="nav-explore" class="btn btn-primary btn-sm" onclick="switchTab('explore')">
+          <i data-lucide="stethoscope"></i> Find Doctors
+        </button>
+        <button class="btn btn-secondary btn-sm" onclick="openSymptomChecker()" style="border: 1px dashed var(--primary-cyan);">
+          <i data-lucide="bot" style="color: #38bdf8;"></i> AI Symptom Checker
+        </button>
+        <button id="nav-appointments" class="btn btn-secondary btn-sm" onclick="switchTab('appointments')">
+          <i data-lucide="calendar"></i> My Appointments
+          <span id="appointment-count-badge" style="background: var(--accent-indigo); color: #fff; border-radius: 99px; font-size: 0.7rem; padding: 0.1rem 0.45rem; font-weight: 700; margin-left: 0.2rem;">2</span>
+        </button>
+        <button id="nav-telehealth" class="btn btn-secondary btn-sm" onclick="switchTab('telehealth')">
+          <i data-lucide="video" style="color: #34d399;"></i> Telehealth Room
+        </button>
+      </nav>
+
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <div style="display: flex; background: rgba(0,0,0,0.3); border-radius: 999px; padding: 3px; border: 1px solid var(--border-light);">
+          <button id="mode-patient" onclick="setAppMode('patient')" style="border: none; padding: 0.35rem 0.75rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; cursor: pointer; background: var(--primary-teal); color: #fff;">Patient</button>
+          <button id="mode-doctor" onclick="setAppMode('doctor')" style="border: none; padding: 0.35rem 0.75rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; cursor: pointer; background: transparent; color: var(--text-sub);">Doctor Portal</button>
+        </div>
+
+        <button onclick="toggleTheme()" class="btn btn-secondary btn-sm" style="width: 38px; height: 38px; padding: 0;">
+          <i data-lucide="sun" id="theme-icon"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Main Dynamic View Container -->
+  <main id="main-content">
+    <!-- Rendered dynamically by JavaScript -->
+  </main>
+
+  <!-- Modals Container -->
+  <div id="modal-container"></div>
+
+  <!-- Footer -->
+  <footer style="background: rgba(5, 9, 18, 0.95); border-top: 1px solid var(--border-light); padding: 3rem 0 1.5rem 0; margin-top: 4rem;">
+    <div class="container" style="text-align: center; font-size: 0.85rem; color: var(--text-muted);">
+      <div style="display: flex; justify-content: center; align-items: center; gap: 0.5rem; margin-bottom: 1rem; color: var(--text-main); font-weight: 700; font-size: 1.1rem;">
+        <i data-lucide="activity" style="color: var(--primary-teal);"></i> HealthPulse PRO Platform
+      </div>
+      <p style="max-width: 600px; margin: 0 auto 1.5rem auto; color: var(--text-sub);">
+        Empowering patients & certified doctors with instant online appointments, printable digital tickets, AI diagnostic triage, and HD video consultations.
+      </p>
+      <div style="border-top: 1px solid var(--border-light); padding-top: 1rem; color: var(--text-muted); font-size: 0.8rem;">
+        © 2026 HealthPulse Pro. Redesigned Doctor Booking Full-Stack System.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Application Logic -->
+  <script>
+    // Global Application State
+    const state = {
+      activeTab: 'explore',
+      appMode: 'patient',
+      theme: 'dark',
+      searchQuery: '',
+      selectedSpecialty: 'all',
+      filterOptions: { availableToday: false, telehealthOnly: false },
+      doctors: [
+        {
+          id: 'doc-1',
+          name: 'Dr. Sarah Jenkins',
+          title: 'Senior Consultant Cardiologist',
+          specialty: 'cardiology',
+          specialtyName: 'Cardiology',
+          rating: 4.9,
+          reviewsCount: 142,
+          experience: '14+ Years Exp.',
+          hospital: 'Apex Heart & Vascular Institute',
+          location: 'Downtown Medical Center, Suite 402',
+          fee: 120,
+          image: 'doctor_cardiology_1785807522996.jpg',
+          availableToday: true,
+          telehealth: true,
+          languages: ['English', 'Spanish'],
+          education: 'MD Cardiology (Harvard Medical), MBBS',
+          about: 'Dr. Sarah Jenkins is a board-certified cardiologist specializing in preventive cardiology, coronary artery disease, and advanced heart failure management.',
+          slots: {
+            morning: ['09:00 AM', '09:30 AM', '10:15 AM', '11:00 AM'],
+            afternoon: ['01:30 PM', '02:15 PM', '03:00 PM']
+          }
+        },
+        {
+          id: 'doc-2',
+          name: 'Dr. Marcus Vance',
+          title: 'Cosmetic & Clinical Dermatologist',
+          specialty: 'dermatology',
+          specialtyName: 'Dermatology',
+          rating: 4.8,
+          reviewsCount: 98,
+          experience: '10+ Years Exp.',
+          hospital: 'Radiant Skin & Aesthetics Clinic',
+          location: 'Westside Healthcare Complex',
+          fee: 95,
+          image: 'doctor_dermatology_1785807537543.jpg',
+          availableToday: true,
+          telehealth: true,
+          languages: ['English', 'French'],
+          education: 'MD Dermatology (Johns Hopkins), Fellow AAD',
+          about: 'Dr. Vance leads cutting-edge dermatological treatments ranging from severe eczema control to advanced laser therapy.',
+          slots: {
+            morning: ['10:00 AM', '10:45 AM', '11:30 AM'],
+            afternoon: ['02:00 PM', '02:45 PM', '03:30 PM']
+          }
+        },
+        {
+          id: 'doc-3',
+          name: 'Dr. Elena Rostova',
+          title: 'Lead Neurologist & Spine Specialist',
+          specialty: 'neurology',
+          specialtyName: 'Neurology',
+          rating: 4.95,
+          reviewsCount: 210,
+          experience: '18+ Years Exp.',
+          hospital: 'Neurology & Brain Health Center',
+          location: 'Metro Science Park, Tower B',
+          fee: 150,
+          image: 'doctor_neurology_1785807550325.jpg',
+          availableToday: false,
+          telehealth: true,
+          languages: ['English', 'German'],
+          education: 'Ph.D Neuroscience (Oxford), MD Neurology',
+          about: 'Internationally recognized for clinical research in migraine management, epilepsy diagnosis, and neuromuscular disorders.',
+          slots: {
+            morning: ['08:30 AM', '09:15 AM', '11:00 AM'],
+            afternoon: ['01:00 PM', '02:30 PM']
+          }
+        }
+      ],
+      appointments: [
+        {
+          id: 'HP-9042',
+          doctorId: 'doc-1',
+          doctorName: 'Dr. Sarah Jenkins',
+          doctorTitle: 'Senior Consultant Cardiologist',
+          specialty: 'Cardiology',
+          doctorImage: 'doctor_cardiology_1785807522996.jpg',
+          patientName: 'Alex Morgan',
+          patientAge: 34,
+          patientGender: 'Male',
+          date: '2026-08-06',
+          timeSlot: '10:15 AM',
+          consultationType: 'Video Telehealth',
+          status: 'Confirmed',
+          fee: 120,
+          symptoms: ['Chest Pain / Palpitations']
+        },
+        {
+          id: 'HP-8821',
+          doctorId: 'doc-2',
+          doctorName: 'Dr. Marcus Vance',
+          doctorTitle: 'Cosmetic & Clinical Dermatologist',
+          specialty: 'Dermatology',
+          doctorImage: 'doctor_dermatology_1785807537543.jpg',
+          patientName: 'Sarah Jenkins',
+          patientAge: 29,
+          patientGender: 'Female',
+          date: '2026-08-08',
+          timeSlot: '02:00 PM',
+          consultationType: 'In-Clinic Visit',
+          status: 'Completed',
+          fee: 95,
+          prescription: {
+            medications: [{ name: 'Retin-A Gel 0.05%', dosage: 'Nightly', duration: '30 Days' }],
+            doctorAdvice: 'Avoid direct sun exposure.'
+          }
+        }
+      ]
+    };
+
+    // Render Helpers
+    function renderApp() {
+      const main = document.getElementById('main-content');
+      
+      if (state.appMode === 'doctor') {
+        main.innerHTML = renderDoctorDashboard();
+      } else if (state.activeTab === 'telehealth') {
+        main.innerHTML = renderTelehealthView();
+      } else if (state.activeTab === 'appointments') {
+        main.innerHTML = renderPatientDashboard();
+      } else {
+        main.innerHTML = renderExploreView();
+      }
+
+      lucide.createIcons();
+    }
+
+    function switchTab(tab) {
+      state.activeTab = tab;
+      renderApp();
+    }
+
+    function setAppMode(mode) {
+      state.appMode = mode;
+      document.getElementById('mode-patient').style.background = mode === 'patient' ? 'var(--primary-teal)' : 'transparent';
+      document.getElementById('mode-patient').style.color = mode === 'patient' ? '#fff' : 'var(--text-sub)';
+      document.getElementById('mode-doctor').style.background = mode === 'doctor' ? 'var(--accent-indigo)' : 'transparent';
+      document.getElementById('mode-doctor').style.color = mode === 'doctor' ? '#fff' : 'var(--text-sub)';
+      renderApp();
+    }
+
+    function toggleTheme() {
+      state.theme = state.theme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', state.theme);
+    }
+
+    // Views
+    function renderExploreView() {
+      const filteredDocs = state.doctors.filter(d => {
+        if (state.selectedSpecialty !== 'all' && d.specialty !== state.selectedSpecialty) return false;
+        if (state.searchQuery) {
+          const q = state.searchQuery.toLowerCase();
+          if (!d.name.toLowerCase().includes(q) && !d.specialtyName.toLowerCase().includes(q)) return false;
+        }
+        return true;
+      });
+
+      return `
+        <section style="padding: 3.5rem 0 2rem 0; text-align: center;">
+          <div class="container">
+            <span className="badge badge-teal" style="display: inline-flex; gap: 0.5rem; padding: 0.4rem 1rem; border-radius: 999px; background: rgba(13,148,136,0.15); color: #2dd4bf; margin-bottom: 1rem;">
+              <i data-lucide="sparkles"></i> Verified Specialist Doctors & Telehealth
+            </span>
+            <h1 style="font-size: 2.8rem; font-weight: 800; line-height: 1.2; margin-bottom: 1rem;">
+              Your Health, Priority #1. <br/><span class="gradient-text">Book Top Doctor Specialists</span> Instantly.
+            </h1>
+            <p style="color: var(--text-sub); max-width: 650px; margin: 0 auto 2rem auto; font-size: 1.05rem;">
+              Schedule in-clinic visits or live video consultations with top-rated medical experts. Zero waiting time & digital prescription pass.
+            </p>
+
+            <!-- Search Bar -->
+            <div class="glass-panel" style="padding: 1rem; max-width: 750px; margin: 0 auto 2.5rem auto;">
+              <div style="display: flex; gap: 0.75rem;">
+                <input type="text" class="form-input" placeholder="Search doctor name, specialty..." value="${state.searchQuery}" oninput="state.searchQuery = this.value; renderApp();" />
+                <button class="btn btn-primary"><i data-lucide="search"></i> Search</button>
+              </div>
+            </div>
+
+            <!-- Doctors Grid -->
+            <div class="doctors-grid" style="text-align: left;">
+              ${filteredDocs.map(doc => `
+                <div class="glass-panel" style="padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between;">
+                  <div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                      <span class="badge badge-teal">${doc.specialtyName}</span>
+                      <span class="badge badge-emerald"><span class="pulse-dot"></span> Available Today</span>
+                    </div>
+
+                    <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                      <img src="${doc.image}" alt="${doc.name}" style="width: 80px; height: 80px; border-radius: 16px; object-fit: cover;" />
+                      <div>
+                        <h3 style="font-size: 1.15rem; font-weight: 700;">${doc.name}</h3>
+                        <div style="font-size: 0.825rem; color: var(--primary-cyan);">${doc.title}</div>
+                        <div style="font-size: 0.8rem; color: #fbbf24; font-weight: 700; margin-top: 0.3rem;">★ ${doc.rating} (${doc.reviewsCount} reviews)</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div style="background: rgba(0,0,0,0.2); padding: 0.75rem 1rem; border-radius: 12px; display: flex; justify-content: space-between; margin-bottom: 1rem; font-size: 0.85rem;">
+                    <span>${doc.hospital}</span>
+                    <strong style="color: var(--primary-emerald);">$${doc.fee}</strong>
+                  </div>
+
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                    <button class="btn btn-primary btn-sm" onclick="openBookingModal('${doc.id}')"><i data-lucide="calendar"></i> Book Visit</button>
+                    <button class="btn btn-outline btn-sm" onclick="switchTab('telehealth')"><i data-lucide="video"></i> Telehealth</button>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </section>
+      `;
+    }
+
+    function renderPatientDashboard() {
+      return `
+        <div class="container" style="padding: 2.5rem 0;">
+          <h1 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 0.3rem;">My Appointments Dashboard</h1>
+          <p style="color: var(--text-sub); margin-bottom: 2rem;">Manage active visit passes, digital tickets, and telehealth rooms</p>
+
+          <div style="display: flex; flex-direction: column; gap: 1rem;">
+            ${state.appointments.map(app => `
+              <div class="glass-panel" style="padding: 1.25rem 1.5rem; display: flex; align-items: center; justify-content: space-between;">
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                  <img src="${app.doctorImage}" style="width: 54px; height: 54px; border-radius: 12px; object-fit: cover;" />
+                  <div>
+                    <div style="font-weight: 700; font-size: 1.1rem;">${app.doctorName} <span class="badge badge-emerald">${app.status}</span></div>
+                    <div style="font-size: 0.825rem; color: var(--primary-cyan);">${app.specialty} • ${app.consultationType}</div>
+                    <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.2rem;">📅 ${app.date} at ⏰ ${app.timeSlot}</div>
+                  </div>
+                </div>
+
+                <div style="display: flex; gap: 0.5rem;">
+                  <button class="btn btn-secondary btn-sm" onclick="openPassModal('${app.id}')"><i data-lucide="qr-code"></i> Digital Ticket</button>
+                  <button class="btn btn-primary btn-sm" onclick="switchTab('telehealth')"><i data-lucide="video"></i> Telehealth Room</button>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderDoctorDashboard() {
+      return `
+        <div class="container" style="padding: 2.5rem 0;">
+          <div class="glass-panel" style="padding: 1.5rem 2rem; margin-bottom: 2rem; border-color: var(--primary-teal);">
+            <h1 style="font-size: 1.6rem; font-weight: 800;">Welcome, Dr. Sarah Jenkins (Physician View)</h1>
+            <p style="color: var(--text-sub);">Manage patient queues, telehealth visits, and digital e-prescriptions.</p>
+          </div>
+
+          <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem;">Scheduled Patients Queue</h3>
+          <div style="display: flex; flex-direction: column; gap: 1rem;">
+            ${state.appointments.map(app => `
+              <div class="glass-panel" style="padding: 1.25rem; display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                  <div style="font-weight: 700; font-size: 1.05rem;">${app.patientName} (${app.patientAge} yrs, ${app.patientGender})</div>
+                  <div style="font-size: 0.825rem; color: var(--primary-cyan);">Time: ${app.timeSlot} | Symptoms: ${app.symptoms.join(', ')}</div>
+                </div>
+                <button class="btn btn-primary btn-sm" onclick="switchTab('telehealth')"><i data-lucide="video"></i> Start Consultation</button>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderTelehealthView() {
+      return `
+        <div class="container" style="padding: 2rem 0;">
+          <div style="background: #040711; border-radius: 20px; border: 1px solid var(--border-light); padding: 2rem; text-align: center; min-height: 480px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative;">
+            <div className="pulse-dot" style="margin-bottom: 1rem;"></div>
+            <h2 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 0.5rem;">Live Telehealth HD Video Room</h2>
+            <p style="color: var(--primary-cyan); margin-bottom: 1.5rem;">Connected with Dr. Sarah Jenkins (Encrypted Stream)</p>
+            
+            <img src="doctor_cardiology_1785807522996.jpg" style="width: 220px; height: 220px; border-radius: 50%; object-fit: cover; border: 4px solid var(--primary-teal); box-shadow: var(--shadow-glow-teal); margin-bottom: 1.5rem;" />
+            
+            <div style="display: flex; gap: 1rem;">
+              <button class="btn btn-secondary btn-sm"><i data-lucide="mic"></i> Mic On</button>
+              <button class="btn btn-secondary btn-sm"><i data-lucide="video"></i> Camera On</button>
+              <button class="btn btn-danger btn-sm" onclick="switchTab('explore')"><i data-lucide="phone-off"></i> Exit Lobby</button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // Modal Helpers
+    function openBookingModal(docId) {
+      const doc = state.doctors.find(d => d.id === docId);
+      const container = document.getElementById('modal-container');
+      container.innerHTML = `
+        <div class="modal-overlay" onclick="closeModal()">
+          <div class="modal-content" onclick="event.stopPropagation()" style="padding: 2rem;">
+            <h3 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 0.5rem;">Book Visit with ${doc.name}</h3>
+            <p style="color: var(--primary-cyan); margin-bottom: 1.5rem;">${doc.title} • $${doc.fee} Consultation Fee</p>
+
+            <div class="form-group">
+              <label class="form-label">Patient Name</label>
+              <input type="text" id="p-name" class="form-input" value="Alex Morgan" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Select Date & Time Slot</label>
+              <select id="p-slot" class="form-select">
+                <option value="10:15 AM">Today 10:15 AM</option>
+                <option value="02:00 PM">Tomorrow 02:00 PM</option>
+              </select>
+            </div>
+
+            <div style="display: flex; gap: 0.75rem; margin-top: 1.5rem;">
+              <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+              <button class="btn btn-primary" onclick="confirmBooking('${doc.id}')"><i data-lucide="check-circle-2"></i> Confirm Booking</button>
+            </div>
+          </div>
+        </div>
+      `;
+      lucide.createIcons();
+    }
+
+    function confirmBooking(docId) {
+      const doc = state.doctors.find(d => d.id === docId);
+      const newApp = {
+        id: 'HP-' + Math.floor(1000 + Math.random() * 9000),
+        doctorId: doc.id,
+        doctorName: doc.name,
+        doctorTitle: doc.title,
+        specialty: doc.specialtyName,
+        doctorImage: doc.image,
+        patientName: document.getElementById('p-name').value || 'Alex Morgan',
+        patientAge: 32,
+        patientGender: 'Male',
+        date: '2026-08-06',
+        timeSlot: document.getElementById('p-slot').value,
+        consultationType: 'Video Telehealth',
+        status: 'Confirmed',
+        fee: doc.fee,
+        symptoms: ['Routine Consultation']
+      };
+
+      state.appointments.unshift(newApp);
+      closeModal();
+      openPassModal(newApp.id);
+      renderApp();
+    }
+
+    function openPassModal(appId) {
+      const app = state.appointments.find(a => a.id === appId);
+      const container = document.getElementById('modal-container');
+      container.innerHTML = `
+        <div class="modal-overlay" onclick="closeModal()">
+          <div class="modal-content" onclick="event.stopPropagation()" style="padding: 2rem;">
+            <div style="text-align: center; margin-bottom: 1.5rem;">
+              <h2 style="font-size: 1.5rem; font-weight: 800;">Digital Appointment Pass</h2>
+              <div class="badge badge-emerald" style="margin-top: 0.3rem;">${app.status}</div>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #0d9488, #06b6d4); color: #fff; padding: 1.25rem; border-radius: 16px; margin-bottom: 1.5rem;">
+              <div style="font-size: 0.8rem; opacity: 0.9;">TICKET ID: ${app.id}</div>
+              <div style="font-size: 1.2rem; font-weight: 800;">${app.doctorName}</div>
+              <div style="font-size: 0.9rem;">Patient: ${app.patientName}</div>
+              <div style="font-size: 0.85rem; margin-top: 0.5rem;">📅 ${app.date} at ${app.timeSlot}</div>
+            </div>
+
+            <div style="display: flex; gap: 0.75rem;">
+              <button class="btn btn-secondary" onclick="window.print()"><i data-lucide="printer"></i> Print Ticket</button>
+              <button class="btn btn-primary" onclick="closeModal(); switchTab('telehealth');"><i data-lucide="video"></i> Launch Telehealth</button>
+            </div>
+          </div>
+        </div>
+      `;
+      lucide.createIcons();
+    }
+
+    function openSymptomChecker() {
+      const container = document.getElementById('modal-container');
+      container.innerHTML = `
+        <div class="modal-overlay" onclick="closeModal()">
+          <div class="modal-content" onclick="event.stopPropagation()" style="padding: 2rem;">
+            <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 0.5rem;"><i data-lucide="bot" style="color: #38bdf8;"></i> AI Symptom Assistant</h3>
+            <p style="color: var(--text-sub); margin-bottom: 1rem;">Select symptoms for instant clinical department matching:</p>
+            
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem;">
+              <span class="badge badge-indigo" style="cursor: pointer;" onclick="alert('Analysis: 96% Match with Cardiology')">+ Chest Pain</span>
+              <span class="badge badge-indigo" style="cursor: pointer;" onclick="alert('Analysis: 92% Match with Dermatology')">+ Skin Rash</span>
+              <span class="badge badge-indigo" style="cursor: pointer;" onclick="alert('Analysis: 94% Match with Neurology')">+ Severe Migraine</span>
+            </div>
+
+            <button class="btn btn-secondary" onclick="closeModal()">Close</button>
+          </div>
+        </div>
+      `;
+      lucide.createIcons();
+    }
+
+    function closeModal() {
+      document.getElementById('modal-container').innerHTML = '';
+    }
+
+    // Initialize Application
+    renderApp();
+  </script>
+</body>
+</html>
